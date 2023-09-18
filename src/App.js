@@ -8,8 +8,8 @@ function App(){
 
     const [listOfSongs, setListOfSongs] = useState([])
 
-    function addToPlayListHandler(e, song){
-        setListOfSongs((prev) => [...prev, e.target.value])
+    function addToPlayListHandler(obj){
+        setListOfSongs((prev) => [...prev, obj])
         console.log(listOfSongs)
     }
 
