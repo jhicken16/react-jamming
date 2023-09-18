@@ -13,12 +13,16 @@ function App(){
         console.log(listOfSongs)
     }
 
+    function removeFromPlayListHandler({song}){
+        setListOfSongs((prev) => prev.filter((obj) => obj.song !== song))
+    }
+
 
     return (
         <>
             <SearchContainer />
-            <TrackListContainer addToPlayListHandler={addToPlayListHandler}/>
-            <PlayList listOfSongs={listOfSongs}/>
+            <TrackListContainer listHandler={addToPlayListHandler}/>
+            <PlayList listOfSongs={listOfSongs} listHandler={removeFromPlayListHandler}/>
         </>
     )
 }

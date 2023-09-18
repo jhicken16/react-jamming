@@ -1,7 +1,7 @@
 import React from 'react';
 import Track from '../../track/TrackComponents'
 
-function TrackListComponent({addToPlayListHandler}){
+function TrackListComponent({listHandler}){
     const arr= [{song: "song1", artist: "artist1", album: "album1"}, {song: "song2", artist: "artist2", album: "album2"}, {song: "song3", artist: "artist3", album: "album3"}];
 
     return (
@@ -9,7 +9,7 @@ function TrackListComponent({addToPlayListHandler}){
             {
                 arr.map((x) => {
                     //pass key to component
-                    return <Track key={x} value={x} addToPlayListHandler={addToPlayListHandler}/>
+                    return <Track key={x} value={x} listHandler={listHandler}/>
                 })
             }
         </ul>
