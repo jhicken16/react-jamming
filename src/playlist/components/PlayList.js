@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import Track from '../../track/TrackComponents'
 
-function PlayList({listOfSongs, listHandler}){
+function PlayList({listOfSongs, listHandler, handlePlayListSubmit}){
 
     const [playListTitle, setPlayListTitle] = useState('')
     
@@ -10,10 +10,13 @@ function PlayList({listOfSongs, listHandler}){
         setPlayListTitle(e.target.value)
     }
 
+
     return (
         <div>
             <form>
-                <input type="text" onChange={(handlePlayListTitle)}/>
+                <label htmlFor="playListName">play list name:</label>
+                <input id="playListName" type="text" onChange={(handlePlayListTitle)}/>
+                <button onClick={() => handlePlayListSubmit(playListTitle)}>save To spotify</button>
             </form>
             
             <ul id="playListSongs">

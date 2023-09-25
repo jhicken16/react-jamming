@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import SearchBar from '../components/SearchBar'
-import results from '../../SearchResults/Reasults';
+import results from '../../spotify/fetchSearchResualts';
 
 function SearchContainer({authorization, spotifyListHandler}){
 
