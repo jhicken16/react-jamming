@@ -8,7 +8,7 @@ function Track(props){
 
     return (
        <div>
-        <h1>{props.value.song}, {props.value.artist}, {props.value.album}</h1>
+        <h1>{props.value.name}, {props.value.artist}, {props.value.album}</h1>
         <button value={props.value} onClick={() => {props.listHandler(props.value)}}>+</button>
        </div>    
     )
