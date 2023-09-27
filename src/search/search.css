@@ -1,0 +1,19 @@
+.searchContainer{
+    
+    display: flex;
+    justify-content: center;
+    padding: 2%;
+    background-color: rgba(0, 0, 0, 0.568);
+    margin: 3% 28% 1% 28%;
+    border-radius: 50px;
+    
+}
+.searchForm{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+
+
+

@@ -1,5 +1,6 @@
 import React from 'react'
-
+import './track.css'
+import '../conformStyles/button.css'
 
 function Track(props){
 
@@ -7,9 +8,9 @@ function Track(props){
     console.log(props)
 
     return (
-       <div>
-        <h1>{props.value.name}, {props.value.artist}, {props.value.album}</h1>
-        <button value={props.value} onClick={() => {props.listHandler(props.value)}}>+</button>
+       <div className='trackItem'>
+        <p className='songInfo'>{props.value.name} | {props.value.artist} | {props.value.album}</p>
+        <button className='button-77' value={props.value} onClick={() => {props.listHandler(props.value)}}>+</button>
        </div>    
     )
 }

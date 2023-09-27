@@ -1,5 +1,6 @@
 export default async function spotifyMakePlayList(authorization, playListName){
     
+    
 
     let url = 'https://api.spotify.com/v1/users/'
     url += authorization.username.id
@@ -18,6 +19,7 @@ export default async function spotifyMakePlayList(authorization, playListName){
         })
     }
 
+    
 
     try{
         const response = await fetch(url, param)
@@ -25,7 +27,9 @@ export default async function spotifyMakePlayList(authorization, playListName){
             throw new Error("Response not ok!")
         }
         else{
-            console.log(await response.json())
+            const playlist = await response.json()
+            console.log(playlist)
+            return playlist
         }
     }
     catch(err){

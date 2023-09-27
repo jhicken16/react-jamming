@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react'
 
-import SearchContainer from './search/containers/SearchContainer.js'
-import TrackListContainer from "./trackList/containers/TrackListComponent"
-import PlayList from './playlist/components/PlayList'
+import SearchContainer from './search/SearchContainer.js'
+import TrackListContainer from "./lists/TrackListComponent.js"
+import PlayList from './lists/PlayList.js'
 import authorize from './spotify/authorize.js'
 import fetchSpotifyUserName from './spotify/fetchSpotifyUsername.js'
 import spotifyMakePlayList from './spotify/spotifyMakePlayList.js'
+import spotifyAddTracksToPlayList from './spotify/spotifyAddTracksToPlayList.js'
 
 function App(){
 
@@ -23,13 +24,13 @@ function App(){
         //redirects to spotifies webpage to log in and returns authorization key
             const fetchData = async () => {
                 const auth = await authorize()
-                //Take authorsation code and fetches users username
+                //Take authorization code and fetches users username
                 auth.username = await fetchSpotifyUserName(auth)
                 setAuthorization(auth)
 
                 console.log(auth)
 
-            //set timmer to clear authorization key when it has expired 
+            //set timer to clear authorization key when it has expired 
                 setTimeout(() => {
                 window.history.replaceState({}, "", window.origin) 
                 setAuthorization({})
@@ -40,27 +41,43 @@ function App(){
     },[])  
        
     function addToPlayListHandler(obj){
+
         setListOfSongs((prev) => [...prev, obj])
-        console.log(listOfSongs)
     }
 
-    function removeFromPlayListHandler({song}){
-        setListOfSongs((prev) => prev.filter((obj) => obj.song !== song))
+    function removeFromPlayListHandler({id}){
+        setListOfSongs((prev) => prev.filter((obj) => obj.id !== id))
     }
 
     //set tracks array from searchBar
     function spotifyListHandler(list){
+
         setSpotifyList(list)
     }
-    function handlePlayListSubmit(playListName){
-        spotifyMakePlayList(authorization, playListName)
+    async function handlePlayListSubmit(playListName){
+
+        const playListObj = await spotifyMakePlayList(authorization, playListName)
+
+        const tracksAdded = await spotifyAddTracksToPlayList(playListObj, authorization, listOfSongs)
+
+        if (tracksAdded.snapshot_id){
+            setListOfSongs([])
+        }
     }
 
     return (
         <>
             <SearchContainer authorization={authorization} spotifyListHandler={spotifyListHandler}/>
-            <TrackListContainer listHandler={addToPlayListHandler} spotifyList={spotifyList}/>
-            <PlayList listOfSongs={listOfSongs} listHandler={removeFromPlayListHandler} handlePlayListSubmit={handlePlayListSubmit}/>
+            <div style={{
+                display: 'flex',
+                flexDirection: 'row',
+                width: '100%',
+                margin: '2% 5%'
+            }}>
+                <TrackListContainer listHandler={addToPlayListHandler} spotifyList={spotifyList}/>
+                <PlayList listOfSongs={listOfSongs} listHandler={removeFromPlayListHandler} handlePlayListSubmit={handlePlayListSubmit}/>
+            </div>
+            
             
         </>
     )

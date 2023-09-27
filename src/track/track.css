@@ -1,0 +1,7 @@
+.trackItem{
+    display: flex;
+}
+.songInfo{
+    width: 80%;
+    color: white;
+}
