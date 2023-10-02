@@ -10,7 +10,7 @@ async function  authorize(){
         url += '?response_type=token'
         url += '&client_id=' + encodeURIComponent(CLIENT_ID)
         url += '&scope=' + encodeURIComponent(scopeList)
-        url += '&redirect_uri=' + encodeURIComponent('http://localhost:3000/')
+        url += '&redirect_uri=' + encodeURIComponent('https://651ae696f4b3573c1513878b--luminous-bienenstitch-c95c1d.netlify.app/')
 
         window.location = url
     }
